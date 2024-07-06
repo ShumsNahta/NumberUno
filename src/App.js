@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import './ComponentsCss/CustomCursor.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
+import CustomCursor from './Components/CustomCursor';
+import Home from './Components/Home';
+import { DNA } from 'react-loader-spinner';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+  }, [])
+
+  if (loading) {
+    return (
+      <>
+        <div className='loader'>
+          <DNA
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </div>
+      </>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CustomCursor />
+      <Home />
+    </>
   );
 }
 
